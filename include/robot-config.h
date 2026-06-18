@@ -2,12 +2,12 @@ using namespace vex;
 
 extern brain Brain;
 
-extern motor LeftFront;
-extern motor LeftMiddle;
-extern motor LeftBack;
-extern motor RightFront;
-extern motor RightMiddle;
-extern motor RightBack;
+extern motor leftFront;
+extern motor leftMiddle;
+extern motor leftBack;
+extern motor rightFront;
+extern motor rightMiddle;
+extern motor rightBack;
 
 extern controller Controller;
 

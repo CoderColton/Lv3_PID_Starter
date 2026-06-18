@@ -5,22 +5,30 @@ void PID(double target, double maxIntegral, double tolerance){
   
   //Initialize remaining variables
   double error = target;
+  double measuredValue = 0;
+  const double gearRatio = 3.0/5; // Small gear = 3 and big gear = 5. 3/5 is the gear ratio
+  const double wheelCircumference = M_PI * 3.25; // 3.25 is the diameter of the wheels
+  double outputSpeed = 0;
 
   double derivative = 0;
   double integral = 0;
   double lastError = error;
   double total = 0;
 
+  // K basically means the strength of each part of PID
   double kP = 0;
   double kI = 0;
   double kD = 0;
 
+  leftFront.setPosition(0, turns);
+  leftFront.setPosition(0, degrees);
+
   //Main loop, when the robot is more than the desired distance from the target
-  while(/*Condition here*/){
+  while(error > tolerance){
 
     //Calculate how far the robot is from the target
-    
-
+    measuredValue = wheelCircumference * leftFront.position(turns) * gearRatio;
+    error = target - measuredValue;
 
     //Find integral value
 
@@ -32,16 +40,16 @@ void PID(double target, double maxIntegral, double tolerance){
 
     
     //Calculate the target speed for the drivetrain
-    
+    outputSpeed = kP * error;
 
     //Spin drivetrain at the target speed
     /*
-    LeftBack.spin();
-    RightBack.spin();
-    LeftFront.spin();
-    RightFront.spin();
-    LeftMiddle.spin();
-    RightMiddle.spin();
+    leftBack.spin();
+    rightBack.spin();
+    leftFront.spin();
+    rightFront.spin();
+    leftMiddle.spin();
+    rightMiddle.spin();
     */
 
 
@@ -49,12 +57,12 @@ void PID(double target, double maxIntegral, double tolerance){
     wait(15, msec);
   }
   //Brake motors after driving is finished
-  LeftBack.stop(brake);
-  RightBack.stop(brake);
-  RightFront.stop(brake);
-  LeftFront.stop(brake);
-  LeftMiddle.stop(brake);
-  RightMiddle.stop(brake);
+  leftBack.stop(brake);
+  rightBack.stop(brake);
+  rightFront.stop(brake);
+  leftFront.stop(brake);
+  leftMiddle.stop(brake);
+  rightMiddle.stop(brake);
   //Short delay to come to a full stop
   wait(50, msec);
 }
