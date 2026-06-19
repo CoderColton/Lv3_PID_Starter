@@ -16,6 +16,7 @@ void PID(double target, double maxIntegral, double tolerance){
   double outputSpeed = 0;
 
   // K basically means the strength of each part of PID. These are all called tuning constants
+  // Some PID things need adjustment
   double kP = 4;
   double kI = 0.01;
   double kD = 0.3;
